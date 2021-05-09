@@ -17,7 +17,7 @@ class InMemory(Storage):
         self.data = dict()
 
     def get(self, key):
-        self.data.get(key, None)
+        return self.data.get(key, None)
 
     def set(self, key, value):
         self.data[key] = value
@@ -28,7 +28,26 @@ class Redis(Storage):
         self.data = PyRedis()
 
     def get(self, key):
-        self.data.get(key)
+        return self.data.get(key)
 
     def set(self, key, value):
         self.data.set(key, value)
+
+
+class Store:
+    store = Storage()
+
+    @classmethod
+    def __init__(cls, t):
+        if t == 'redis':
+            cls.store = Redis()
+        else:
+            cls.store = InMemory()
+
+    @classmethod
+    def get(cls, key):
+        return cls.store.get(key)
+
+    @classmethod
+    def set(cls, key, value):
+        cls.store.set(key, value)
