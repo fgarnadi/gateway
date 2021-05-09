@@ -8,6 +8,7 @@ authors = ["Fajar Garnadi <fajar.garnadi@gmail.com>"]
 python = "^3.9"
 Flask = "^1.1.2"
 gunicorn = "^20.1.0"
+redis = "^3.5.3"
 
 [tool.poetry.dev-dependencies]
 
